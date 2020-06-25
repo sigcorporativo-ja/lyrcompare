@@ -97,7 +97,10 @@ export default class LyrCompare extends M.Plugin {
 
       /**
        * staticDivision
-       * Value: number in range 0 - 1
+       * Value: number in range 0 - 2
+       * 0 - Dynamic
+       * 1 - Static
+       * 2 - Mixed
        * @type {number}
        * @public
        */
@@ -123,6 +126,10 @@ export default class LyrCompare extends M.Plugin {
       /**
        * Comparison Mode
        * Value: number in range 0 - 3
+       * 0 - Off
+       * 1 - Vertical Comparison
+       * 2 - Horizontal Comparison
+       * 3 - Multiple Comparison (4 layers)
        * @type {number}
        * @public
        */

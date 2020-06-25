@@ -27,11 +27,11 @@ export default class LyrCompareControl extends M.Control {
    * @api stable
    */
   constructor(values) {
-    // 1. checks if the implementation can create PluginControl
+    // 1. Checks if the implementation can create PluginControl
     if (M.utils.isUndefined(LyrcompareImplControl)) {
       M.exception('La implementación usada no puede crear controles LyrCompareControl');
     }
-    // 2. implementation of this control
+    // 2. Implementation of this control
     const impl = new LyrcompareImplControl();
     super(impl, 'LyrCompare');
 
