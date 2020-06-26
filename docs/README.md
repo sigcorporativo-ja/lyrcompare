@@ -33,7 +33,10 @@ la/s url en formato mapea para insertar una capa a través de servicios WMS ó W
 
 - **collapsed**. Si es *true*, el panel aparece cerrado. Si es *false*, el panel aparece abierto. Por defecto tiene el valor *true*.
 
-- **staticDivision**. Permite definir si al arrancar la herramienta dividirá las capas por la posición del ratón *(valor 0)*, por el punto medio del lienzo de cartografía *(valor 1)* o por el punto medio del lienzo de cartografía con líneas arrastrables *(valor 2)*.
+- **staticDivision**. Permite definir si al arrancar la herramienta la posición de la división es:
+  - 0 (Dinámico): sigue la posición del ratón.
+  - 1 (Estático): está el punto medio del lienzo de cartografía y el mapa es desplazable 
+  - 2 (Mixto): igual que el modo estático, pero se puede mover la división arrastrándola.
 
 - **opacityVal**. Define el valor de la opacidad que se aplicará a las capas que se muestran sobre la cartografía base. Rango 0 a 100.
 
