@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="mapea" content="yes">
-    <title>Transparency Production TEST</title>
+    <title>Lyrcompare Production TEST</title>
     <link href="http://mapea4-sigc.juntadeandalucia.es/assets/css/mapea-5.1.0.ol.min.css" rel="stylesheet" />
-    <link href="../dist/transparency.ol.min.css" rel="stylesheet" />
+    <link href="../dist/lyrcompare.ol.min.css" rel="stylesheet" />
     <style rel="stylesheet">
         html,
         body {
@@ -25,12 +25,19 @@
     <div id="mapjs" class="container"></div>
     <script type="text/javascript" src="http://mapea4-sigc.juntadeandalucia.es/js/mapea-5.1.0.ol.min.js"></script>
     <script type="text/javascript" src="http://mapea4-sigc.juntadeandalucia.es/js/configuration-5.1.0.js"></script>
-    <script type="text/javascript" src="../dist/transparency.ol.min.js"></script>
+    <script type="text/javascript" src="../dist/lyrcompare.ol.min.js"></script>
     <script type="text/javascript">
         const map = M.map({
             container: 'mapjs',
         });
-        const mp = new M.plugin.Transparency();
+        const mp = new M.plugin.LyrCompare({
+            layers: [
+                'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*orto_2010-11',
+                'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*toporaster',
+                'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*SPOT_Andalucia',
+                'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*base',
+            ],
+        });
         map.addPlugin(mp);
     </script>
 </body>

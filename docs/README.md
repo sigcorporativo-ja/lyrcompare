@@ -22,7 +22,6 @@ Plugin que permite comparar varias capas sobre una cartografía base. La extensi
 
 - **layer**. Parámetro obligatorio. Array que puede contener el/los nombre/s de la/s capa/s (que está/n en el mapa),
 la/s url en formato mapea para insertar una capa a través de servicios WMS ó WMTS, o la capa como objeto.
-A esta/s capa/s se le aplicará el efecto de transparencia.
 
 - **position**. Indica la posición donde se mostrará el plugin.
   - 'TL':top left
@@ -44,13 +43,13 @@ A esta/s capa/s se le aplicará el efecto de transparencia.
   - 2: arranca con el modo de comparación de cortina horizontal.
   - 3: arranca con el modo de comparación múltiple de cuatro capas.
 
-- **defaultLyrA**. Define la capa uno que se carga por defecto. Valores de 1 al número de capas disponibles.
+- **defaultLyrA**. Define la capa uno que se carga por defecto. Valores de 0 al número de capas disponibles. Por defecto: 0
 
-- **defaultLyrB**. Define la capa uno que se carga por defecto. Valores de 2 al número de capas disponibles.
+- **defaultLyrB**. Define la capa dos que se carga por defecto. Valores de 0 al número de capas disponibles. Por defecto: 1
 
-- **defaultLyrC**. Define la capa uno que se carga por defecto. Valores de 3 al número de capas disponibles.
+- **defaultLyrC**. Define la capa tres que se carga por defecto. Valores de 0 al número de capas disponibles. Por defecto: 2
 
-- **defaultLyrD**. Define la capa uno que se carga por defecto. Valores de 4 al número de capas disponibles.
+- **defaultLyrD**. Define la capa cuatro que se carga por defecto. Valores de 0 al número de capas disponibles. Por defecto: 3
 
 - **interface**. Define si mostrar o no la interfaz del plugin.
 
@@ -80,7 +79,7 @@ El modo de división es 1 por lo que será estático.
 La interfaz está activa.
 
 ```javascript
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   layers: [
     'WMS*SIGPAC*https://www.ign.es/wms/pnoa-historico*SIGPAC',
@@ -93,10 +92,10 @@ const pluginLyrCompare = new LyrCompare({
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 0,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: true,
 });
 ```
@@ -106,17 +105,17 @@ const pluginLyrCompare = new LyrCompare({
 Al no indicar capas mostrará un error en pantalla: El número de capas es insuficiente para aplicar el efecto
 
 ```javascript
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   collapsible: true,
   collapsed: false,
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 0,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: true,
 });
 ```
@@ -125,7 +124,7 @@ const pluginLyrCompare = new LyrCompare({
 WMS con formato Mapea y sin interfaz
 
 ```javascript
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   layers: [
     'WMS*SIGPAC*https://www.ign.es/wms/pnoa-historico*SIGPAC',
@@ -138,10 +137,10 @@ const pluginLyrCompare = new LyrCompare({
   staticDivision: 0,
   opacityVal: 100,
   comparisonMode: 2,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: false,
 });
 ```
@@ -151,7 +150,7 @@ const pluginLyrCompare = new LyrCompare({
 WMTS con formato Mapea y sin interfaz
 
 ```javascript
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   layers: [
     'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*orto_2010-11',
@@ -164,10 +163,10 @@ const pluginLyrCompare = new LyrCompare({
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 1,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: false,
 });
 ```
@@ -182,7 +181,7 @@ const wms3 = new M.layer.WMS('WMS*Nacional_1981-1986*https://www.ign.es/wms/pnoa
 const wms4 = new M.layer.WMS('WMS*Interministerial_1973-1986*https://www.ign.es/wms/pnoa-historico*Interministerial_1973-1986');
 map.addLayers([wms1, wms2, wms3, wms4]);
 
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   layers: [
     'SIGPAC', 'OLISTAT', 'Nacional_1981-1986', 'Interministerial_1973-1986'
@@ -192,10 +191,10 @@ const pluginLyrCompare = new LyrCompare({
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 1,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: false,
 });
 ```
@@ -210,7 +209,7 @@ const wmts3 = new M.layer.WMTS('WMTS*http://www.callejerodeandalucia.es/servicio
 const wmts4 = new M.layer.WMTS('WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*base');
 myMap.addLayers([wmts1, wmts2, wmts3, wmts4]);
 
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   layers: [
     'orto_2010-11', 'toporaster', 'SPOT_Andalucia-1986', 'base'
@@ -220,10 +219,10 @@ const pluginLyrCompare = new LyrCompare({
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 1,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: false,
 });
 ```
@@ -236,7 +235,7 @@ const wmts1 = new M.layer.WMTS('WMTS*http://www.ideandalucia.es/geowebcache/serv
 const wms2 = new M.layer.WMS('WMS*OLISTAT*https://www.ign.es/wms/pnoa-historico*OLISTAT');
 myMap.addLayers([wmts1, wms2]);
 
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   layers: [
     'orto_2010-11', 'OLISTAT', 'WMS*Nacional_1981-1986*https://www.ign.es/wms/pnoa-historico*Nacional_1981-1986', 'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*base'
@@ -246,10 +245,10 @@ const pluginLyrCompare = new LyrCompare({
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 1,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: false,
 });
 ```
@@ -258,7 +257,7 @@ const pluginLyrCompare = new LyrCompare({
 Al añadir capas que no son válidas para el plugin no se contarán y mostrará el mensaje: El número de capas es insuficiente para aplicar el efecto
 
 ```javascript
-const pluginLyrCompare = new LyrCompare({
+const pluginLyrCompare = new M.plugin.LyrCompare({
   position: 'TL',
   layers: [
     'WFST*CapaWFS*http://geostematicos-sigc.juntadeandalucia.es/geoserver/tematicos/ows?*tematicos:Provincias*MPOLYGON',
@@ -271,10 +270,10 @@ const pluginLyrCompare = new LyrCompare({
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 0,
-  defaultLyrA: 1,
-  defaultLyrB: 2,
-  defaultLyrC: 3,
-  defaultLyrD: 4,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
   interface: true,
 });
 ```

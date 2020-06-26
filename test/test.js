@@ -1,238 +1,205 @@
 import LyrCompare from 'facade/lyrcompare';
-//import ShareMap from '../../sharemap/src/facade/js/sharemap';
 
-// Código mínimo para arrancar
-/*
 const map = M.map({
   container: 'mapjs',
 });
-*/
 
 M.language.setLang('es'); //Español
 //M.language.setLang('en');//Inglés
 
-const map = M.map({
-  container: 'mapjs',
-  center: {
-    x: -667143.31,
-    y: 4493011.77,
-    draw: true //Dibuja un punto en el lugar de la coordenada
-  },
-  controls: ['scale', 'location'],
-  /*projection: "EPSG:25830*m",*/
-  projection: "EPSG:3857*m",
-  zoom: 15,
-
-  //Ojo, si añado esta capa sin TOC, se ve siempre y no se muestran capas base
-  /*layers: ["WMTS*http://www.ign.es/wmts/pnoa-ma?*OI.OrthoimageCoverage*EPSG:25830*PNOA"],*/
-});
-
-
-
-/*
-Añado un BackImageLayer para ver el comportamiento.
-*/
-//Código para configurar el BackImgLayer
-const mpBIL = new M.plugin.BackImgLayer({
-  position: 'TR',
-  collapsible: true,
-  collapsed: true,
-  layerId: 0,
-  layerVisibility: true,
-  layerOpts: [{
-      id: 'mapa',
-      preview: 'http://componentes.ign.es/api-core/plugins/backimglayer/images/svqmapa.png',
-      title: 'Mapa',
-      layers: [new M.layer.WMTS({
-        url: 'http://www.ign.es/wmts/ign-base?',
-        name: 'IGNBaseTodo',
-        legend: 'Mapa IGN',
-        matrixSet: 'GoogleMapsCompatible',
-        transparent: false,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/jpeg',
-      })],
-    },
-    {
-      id: 'imagen',
-      title: 'Imagen',
-      preview: 'http://componentes.ign.es/api-core/plugins/backimglayer/images/svqimagen.png',
-      layers: [new M.layer.WMTS({
-        url: 'http://www.ign.es/wmts/pnoa-ma?',
-        name: 'OI.OrthoimageCoverage',
-        legend: 'Imagen (PNOA)',
-        matrixSet: 'GoogleMapsCompatible',
-        transparent: false,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/jpeg',
-      })],
-    },
-    {
-      id: 'hibrido',
-      title: 'Híbrido',
-      preview: 'http://componentes.ign.es/api-core/plugins/backimglayer/images/svqhibrid.png',
-      layers: [new M.layer.WMTS({
-          url: 'http://www.ign.es/wmts/pnoa-ma?',
-          name: 'OI.OrthoimageCoverage',
-          legend: 'Imagen (PNOA)',
-          matrixSet: 'GoogleMapsCompatible',
-          transparent: true,
-          displayInLayerSwitcher: false,
-          queryable: false,
-          visible: true,
-          format: 'image/png',
-        }),
-        new M.layer.WMTS({
-          url: 'http://www.ign.es/wmts/ign-base?',
-          name: 'IGNBaseOrto',
-          matrixSet: 'GoogleMapsCompatible',
-          legend: 'Mapa IGN',
-          transparent: false,
-          displayInLayerSwitcher: false,
-          queryable: false,
-          visible: true,
-          format: 'image/png',
-        })
-      ],
-    },
-    {
-      id: 'lidar',
-      preview: 'http://componentes.ign.es/api-core/plugins/backimglayer/images/svqlidar.png',
-      title: 'LIDAR',
-      layers: [new M.layer.WMTS({
-        url: 'https://wmts-mapa-lidar.idee.es/lidar?',
-        name: 'EL.GridCoverageDSM',
-        legend: 'Modelo Digital de Superficies LiDAR',
-        matrixSet: 'GoogleMapsCompatible',
-        transparent: false,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/png',
-      })],
-    },
-  ],
-});
-
-map.addPlugin(mpBIL);
-
-
-// 1 WMS por url
-// const pluginTransparency = new Transparency({
-//   position: 'TL',
-//   layers: ['WMS*IGN*http://www.ign.es/wms-inspire/ign-base*IGNBaseTodo'],
-//   collapsible: false
-// });
-
-// 2 WMTS por url
-// const pluginTransparency = new Transparency({
-//   position: 'TL',
-//   layers: ['WMTS*IGN*http://www.ideandalucia.es/geowebcache/service/wmts*toporaster'],
-//   collapsible: false
-// });
-
-// 3 WMS y WMTS como objetos
-let wmtsToporaster = new M.layer.WMTS({
-  url: "http://www.ideandalucia.es/geowebcache/service/wmts",
-  name: "toporaster",
-  matrixSet: "EPSG:25830",
-  legend: "Toporaster"
-}, {
-  format: 'image/png'
-});
-map.addWMTS(wmtsToporaster);
-
-/*
-const wms = new M.layer.WMS({
-  url: 'http://www.ign.es/wms-inspire/unidades-administrativas?',
-  name: 'AU.AdministrativeBoundary',
-  legend: 'Limite administrativo',
-  tiled: false,
-}, {});
-map.addWMS(wms);
-*/
-
-let wmtsMinutasMTN50 = new M.layer.WMTS({
-  url: "http://www.ign.es/wmts/primera-edicion-mtn",
-  name: "catastrones",
-  /*matrixSet: "EPSG:25830",*/
-  matrixSet: "GoogleMapsCompatible",
-  legend: "Minutas MTN50"
-}, {
-  format: 'image/jpeg'
-});
-map.addWMTS(wmtsMinutasMTN50);
-
-
-let wmtsMTN501edi = new M.layer.WMTS({
-  url: "http://www.ign.es/wmts/primera-edicion-mtn",
-  name: "mtn50-edicion1",
-  /*matrixSet: "EPSG:25830",*/
-  matrixSet: "GoogleMapsCompatible",
-  legend: "Primera edición MTN50"
-}, {
-  format: 'image/jpeg'
-});
-map.addWMTS(wmtsMTN501edi);
-
-let wmtsMTN251edi = new M.layer.WMTS({
-  url: "http://www.ign.es/wmts/primera-edicion-mtn",
-  name: "mtn25-edicion1",
-  /*matrixSet: "EPSG:25830",*/
-  matrixSet: "GoogleMapsCompatible",
-  legend: "Primera edición MTN25"
-}, {
-  format: 'image/jpeg'
-});
-map.addWMTS(wmtsMTN251edi);
-
-let wmtsLidar = new M.layer.WMTS({
-  url: "http://wmts-mapa-lidar.idee.es/lidar",
-  name: "EL.GridCoverageDSM",
-  matrixSet: "GoogleMapsCompatible",
-  legend: "LiDAR"
-}, {
-  format: 'image/png'
-});
-map.addWMTS(wmtsLidar);
-
-let wmtsSIOSE = new M.layer.WMTS({
-  url: "http://servicios.idee.es/wmts/ocupacion-suelo",
-  name: "LC.LandCoverSurfaces",
-  matrixSet: "GoogleMapsCompatible",
-  legend: "SIOSE"
-}, {
-  format: 'image/jpeg'
-});
-map.addWMTS(wmtsSIOSE);
-
-// 4 WMS y WMTS por nombres
+/**
+ * Ejemplo 1
+ * Insertar capas WMS con formato Mapea.
+ * El modo de comparación es 0, por lo que no se iniciará al cargarlo.
+ * El modo de división es 1 por lo que será estático.
+ * La interfaz está activa.
+ */
 const pluginLyrCompare = new LyrCompare({
-  position: 'BR',
+  position: 'TL',
   layers: [
-    wmtsMTN251edi, wmtsMTN501edi, wmtsToporaster, wmtsMinutasMTN50, wmtsLidar, wmtsSIOSE,
     'WMS*SIGPAC*https://www.ign.es/wms/pnoa-historico*SIGPAC',
     'WMS*OLISTAT*https://www.ign.es/wms/pnoa-historico*OLISTAT',
     'WMS*Nacional_1981-1986*https://www.ign.es/wms/pnoa-historico*Nacional_1981-1986',
     'WMS*Interministerial_1973-1986*https://www.ign.es/wms/pnoa-historico*Interministerial_1973-1986',
-    'WMS*AMS_1956-1957*https://www.ign.es/wms/pnoa-historico*AMS_1956-1957'
   ],
-  /*layers: ['mtn50-edicion1','toporaster', 'AU.AdministrativeBoundary'],*/ //Podemos añadir capas al plugin por el valor del atributo name o por el objeto que las contiene
+  collapsible: true,
+  collapsed: true,
+  staticDivision: 1,
+  opacityVal: 100,
+  comparisonMode: 0,
+  interface: true,
+});
+
+
+/**
+ * Ejemplo 2
+ * Al no indicar capas mostrará un error en pantalla: El número de capas es insuficiente para aplicar el efecto
+ */
+/* const pluginLyrCompare = new LyrCompare({
+  position: 'TL',
   collapsible: true,
   collapsed: false,
   staticDivision: 1,
   opacityVal: 100,
   comparisonMode: 0,
-  defaultLyrA: 1, //Número de capa A que arranca por defecto. Valores 1...nº de capas
-  defaultLyrB: 2, //Número de capa B que arranca por defecto. Valores 1...nº de capas
-  defaultLyrC: 3, //Número de capa C que arranca por defecto. Valores 1...nº de capas
-  defaultLyrD: 4, //Número de capa D que arranca por defecto. Valores 1...nº de capas
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
+  interface: true,
+}); */
+
+/**
+ * Ejemplo 3
+ * WMS con formato Mapea y sin interfaz
+ */
+/* const pluginLyrCompare = new LyrCompare({
+  position: 'TL',
+  layers: [
+    'WMS*SIGPAC*https://www.ign.es/wms/pnoa-historico*SIGPAC',
+    'WMS*OLISTAT*https://www.ign.es/wms/pnoa-historico*OLISTAT',
+    'WMS*Nacional_1981-1986*https://www.ign.es/wms/pnoa-historico*Nacional_1981-1986',
+    'WMS*Interministerial_1973-1986*https://www.ign.es/wms/pnoa-historico*Interministerial_1973-1986',
+  ],
+  collapsible: true,
+  collapsed: false,
+  staticDivision: 0,
+  opacityVal: 100,
+  comparisonMode: 2,
+  interface: false,
 });
+ */
 
-map.addPlugin(pluginLyrCompare);
+/**
+ * Ejemplo 4
+ * WMTS con formato Mapea y sin interfaz
+ */
+/* const pluginLyrCompare = new LyrCompare({
+  position: 'TL',
+  layers: [
+    'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*orto_2010-11',
+    'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*toporaster',
+    'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*SPOT_Andalucia',
+    'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*base',
+  ],
+  collapsible: true,
+  collapsed: false,
+  staticDivision: 1,
+  opacityVal: 100,
+  comparisonMode: 1,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
+  interface: false,
+});
+ */
 
-window.map = map;
+/**
+ * Ejemplo 5
+ * WMS como objeto
+ *//*
+const wms1 = new M.layer.WMS('WMS*SIGPAC*https://www.ign.es/wms/pnoa-historico*SIGPAC');
+const wms2 = new M.layer.WMS('WMS*OLISTAT*https://www.ign.es/wms/pnoa-historico*OLISTAT');
+const wms3 = new M.layer.WMS('WMS*Nacional_1981-1986*https://www.ign.es/wms/pnoa-historico*Nacional_1981-1986');
+const wms4 = new M.layer.WMS('WMS*Interministerial_1973-1986*https://www.ign.es/wms/pnoa-historico*Interministerial_1973-1986');
+map.addLayers([wms1, wms2, wms3, wms4]);
+
+const pluginLyrCompare = new LyrCompare({
+ position: 'TL',
+ layers: [
+   'SIGPAC', 'OLISTAT', 'Nacional_1981-1986', 'Interministerial_1973-1986'
+ ],
+ collapsible: true,
+ collapsed: false,
+ staticDivision: 1,
+ opacityVal: 100,
+ comparisonMode: 1,
+ defaultLyrA: 0,
+ defaultLyrB: 1,
+ defaultLyrC: 2,
+ defaultLyrD: 3,
+ interface: false,
+});
+*/
+
+/**
+ * Ejemplo 6
+ * WMTS como objeto
+ */
+/*
+const wmts1 = new M.layer.WMTS('WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*orto_2010-11');
+const wmts2 = new M.layer.WMTS('WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*toporaster');
+const wmts3 = new M.layer.WMTS('WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*SPOT_Andalucia');
+const wmts4 = new M.layer.WMTS('WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*base');
+map.addLayers([wmts1, wmts2, wmts3, wmts4]);
+
+const pluginLyrCompare = new LyrCompare({
+  position: 'TL',
+  layers: [
+    'orto_2010-11', 'toporaster', 'SPOT_Andalucia-1986', 'base'
+  ],
+  collapsible: true,
+  collapsed: false,
+  staticDivision: 1,
+  opacityVal: 100,
+  comparisonMode: 1,
+  defaultLyrA: 2,
+  defaultLyrB: 0,
+  defaultLyrC: 1,
+  defaultLyrD: 3,
+  interface: false,
+});
+ */
+
+/**
+ * Ejemplo 7
+ * WMS + WMTS como cadena y como texto
+ */
+/*
+const wmts1 = new M.layer.WMTS('WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*orto_2010-11');
+const wms2 = new M.layer.WMS('WMS*OLISTAT*https://www.ign.es/wms/pnoa-historico*OLISTAT');
+map.addLayers([wmts1, wms2]);
+
+const pluginLyrCompare = new LyrCompare({
+  position: 'TL',
+  layers: [
+    'orto_2010-11', 'OLISTAT', 'WMS*Nacional_1981-1986*https://www.ign.es/wms/pnoa-historico*Nacional_1981-1986', 'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*base'
+  ],
+  collapsible: true,
+  collapsed: false,
+  staticDivision: 1,
+  opacityVal: 100,
+  comparisonMode: 1,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
+  interface: false,
+});
+ */
+
+/**
+ * Ejemplo 8
+ * Al añadir capas que no son válidas para el plugin no se contarán y mostrará el mensaje: El número de capas es insuficiente para aplicar el efecto
+ */
+/*
+const pluginLyrCompare = new LyrCompare({
+  position: 'TL',
+  layers: [
+    'WFST*CapaWFS*http://geostematicos-sigc.juntadeandalucia.es/geoserver/tematicos/ows?*tematicos:Provincias*MPOLYGON',
+    'KML*Arboleda*http://mapea4-sigc.juntadeandalucia.es/files/kml/*arbda_sing_se.kml*true',
+    'WFST*CapaWFSColegio*http://g-gis-online-lab.desarrollo.guadaltel.es/geoserver/ggiscloud_root/wms?*ggiscloud_root:a1585301579731_colegios*MPOINT',
+    'WFST*CapaWFSRed*http://g-gis-online-lab.desarrollo.guadaltel.es/geoserver/ggiscloud_root/wms?*ggiscloud_root:a1585301955480_red_hidrografica*MLINE',
+  ],
+  collapsible: true,
+  collapsed: false,
+  staticDivision: 1,
+  opacityVal: 100,
+  comparisonMode: 0,
+  defaultLyrA: 0,
+  defaultLyrB: 1,
+  defaultLyrC: 2,
+  defaultLyrD: 3,
+  interface: true,
+}); */

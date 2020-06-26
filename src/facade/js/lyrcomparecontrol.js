@@ -671,7 +671,7 @@ export default class LyrCompareControl extends M.Control {
             if (newLayer.type === 'WMS') {
               newLayer.load = true;
             } else if (newLayer.type === 'WMTS') {
-              newLayer.facadeLayer_.load = true;
+              newLayer.load = true;
             }
           }, 1000);
         } else {
