@@ -51,8 +51,7 @@
         "type": "simple",
         "name": "defaultLyrD",
         "position": 10
-      },
-      {
+      }, {
         "type": "boolean",
         "name": "interface",
         "position": 11
@@ -73,7 +72,7 @@
     "date": "Junio, 2020",
     "author": "",
     "org": "Consejería de Hacienda, Industria y Energía. Junta de Andalucía.",
-    "tags": "apicnig,plugin",
+    "tags": "mapea,plugin",
     "icon": "./facade/assets/icons/icons.svg"
   }
 }

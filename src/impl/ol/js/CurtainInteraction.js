@@ -181,7 +181,7 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
   }
 
   /** 
-   * Add Layer C to clip
+   * Add Layer D to clip
    * 
    * @param {ol.layer|Array<ol.layer>} layer to clip
    */
@@ -303,11 +303,6 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
       }
     }
 
-    /**
-     * 
-     * e2m: con esto podemos pintar una línea de color para contornear la capa. Pero no queda bien
-     * 
-     */
     if (margenClip > 0) {
       ctx.lineWidth = 2 * margenClip * ratio;
       ctx.strokeStyle = 'rgba(0, 102, 204, 0.9)';
@@ -348,7 +343,6 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
       } else if (this.comparisonMode == 2) {
         ctx.rect(0, this.pos[1], ctx.canvas.width, ctx.canvas.height - this.pos[1]); //e2m: Down dynamic
       } else if (this.comparisonMode == 3) {
-        //ctx.rect(this.pos[0], 0, lienzoMapa[0] - this.pos[0], lienzoMapa[1]); //e2m: split screen three. maybe
         ctx.rect(this.pos[0], 0, lienzoMapa[0] - this.pos[0], this.pos[1]); //e2m: up&right dynamic
       }
 

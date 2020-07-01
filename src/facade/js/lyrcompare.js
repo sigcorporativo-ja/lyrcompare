@@ -97,7 +97,10 @@ export default class LyrCompare extends M.Plugin {
 
       /**
        * staticDivision
-       * Value: number in range 0 - 1
+       * Value: number in range 0 - 2
+       * 0 - Dynamic
+       * 1 - Static
+       * 2 - Mixed
        * @type {number}
        * @public
        */
@@ -123,6 +126,10 @@ export default class LyrCompare extends M.Plugin {
       /**
        * Comparison Mode
        * Value: number in range 0 - 3
+       * 0 - Off
+       * 1 - Vertical Comparison
+       * 2 - Horizontal Comparison
+       * 3 - Multiple Comparison (4 layers)
        * @type {number}
        * @public
        */
@@ -156,6 +163,8 @@ export default class LyrCompare extends M.Plugin {
 
       /**
        * Default Layer A
+       * Value: number in range 0 - Max quantity of layers
+       * Default 0
        * @type {number}
        * @public
        */
@@ -167,6 +176,8 @@ export default class LyrCompare extends M.Plugin {
 
       /**
        * Default Layer B
+       * Value: number in range 0 - Max quantity of layers
+       * Default 0 or 1 if defaultLyrA is 0
        * @type {number}
        * @public
        */
@@ -182,6 +193,8 @@ export default class LyrCompare extends M.Plugin {
 
       /**
        * Default Layer C
+       * Value: number in range 0 - Max quantity of layers
+       * Default 2
        * @type {number}
        * @public
        */
@@ -197,6 +210,8 @@ export default class LyrCompare extends M.Plugin {
 
       /**
        * Default Layer D
+       * Value: number in range 0 - Max quantity of layers
+       * Default 3
        * @type {number}
        * @public
        */
@@ -280,8 +295,8 @@ export default class LyrCompare extends M.Plugin {
     this.map_.removeControls([this.control_]);
     this.control_.removeCurtainLayers(this.control_.getLayersNames());
     [this.name_, this.error_, this.layers, this.controls_, this.map_, this.position, this.collapsed, this.collapsible,
-      this.staticDivision, this.opacityVal, this.comparisonMode, this.metadata_, this.tooltip_, this.interface, this.defaultLyrA,
-      this.defaultLyrB, this.defaultLyrC, this.defaultLyrD
+    this.staticDivision, this.opacityVal, this.comparisonMode, this.metadata_, this.tooltip_, this.interface, this.defaultLyrA,
+    this.defaultLyrB, this.defaultLyrC, this.defaultLyrD
     ] = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
   }
 
