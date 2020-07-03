@@ -68,11 +68,6 @@ M.language.setLang('en');//Idioma inglés
 ```
 Se pueden crear más ficheros de idioma. Basta con copiar la estructura de los ficheros **json** de la carpeta *\src\facade\js\i18n* , renombrar con la abreviatura del nuevo idioma (fr para el fránces), y cambiar los textos, manteniendo las *keywords*.
 
-
-# Otros métodos
-
-No aplica
-
 # Ejemplos de uso
 
 ## Ejemplo 1
