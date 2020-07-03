@@ -7,6 +7,16 @@ const map = M.map({
 M.language.setLang('es'); //Español
 //M.language.setLang('en');//Inglés
 
+const mp = new M.plugin.LyrCompare({
+  layers: [
+      'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*orto_2010-11',
+      'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*toporaster',
+      'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*SPOT_Andalucia',
+      'WMTS*http://www.callejerodeandalucia.es/servicios/base/gwc/service/wmts?*base',
+  ],
+});
+map.addPlugin(mp);
+
 /**
  * Ejemplo 1
  * Insertar capas WMS con formato Mapea.
@@ -14,7 +24,7 @@ M.language.setLang('es'); //Español
  * El modo de división es 1 por lo que será estático.
  * La interfaz está activa.
  */
-const pluginLyrCompare = new LyrCompare({
+/* const pluginLyrCompare = new LyrCompare({
   position: 'TL',
   layers: [
     'WMS*SIGPAC*https://www.ign.es/wms/pnoa-historico*SIGPAC',
@@ -30,7 +40,8 @@ const pluginLyrCompare = new LyrCompare({
   interface: true,
 });
 
-
+map.addPlugin(pluginLyrCompare);
+*/
 /**
  * Ejemplo 2
  * Al no indicar capas mostrará un error en pantalla: El número de capas es insuficiente para aplicar el efecto
