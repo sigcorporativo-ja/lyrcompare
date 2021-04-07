@@ -63,11 +63,19 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
       this.layers_[0].postcompose = this.layers_[0].on('postcompose', this.postcomposeA_.bind(this));
       this.layers_[1].precompose = this.layers_[1].on('precompose', this.precomposeB_.bind(this));
       this.layers_[1].postcompose = this.layers_[1].on('postcompose', this.postcomposeB_.bind(this));
+      this.layers_[0].precompose = this.layers_[0].on('prerender', this.precomposeA_.bind(this));
+      this.layers_[0].postcompose = this.layers_[0].on('postrender', this.postcomposeA_.bind(this));
+      this.layers_[1].precompose = this.layers_[1].on('prerender', this.precomposeB_.bind(this));
+      this.layers_[1].postcompose = this.layers_[1].on('postrender', this.postcomposeB_.bind(this));
       if (this.layers_[2] !== undefined && this.layers_[3] !== undefined) {
         this.layers_[2].precompose = this.layers_[2].on('precompose', this.precomposeC_.bind(this));
         this.layers_[2].postcompose = this.layers_[2].on('postcompose', this.postcomposeC_.bind(this));
         this.layers_[3].precompose = this.layers_[3].on('precompose', this.precomposeD_.bind(this));
         this.layers_[3].postcompose = this.layers_[3].on('postcompose', this.postcomposeD_.bind(this));
+        this.layers_[2].precompose = this.layers_[2].on('prerender', this.precomposeC_.bind(this));
+        this.layers_[2].postcompose = this.layers_[2].on('postrender', this.postcomposeC_.bind(this));
+        this.layers_[3].precompose = this.layers_[3].on('prerender', this.precomposeD_.bind(this));
+        this.layers_[3].postcompose = this.layers_[3].on('postrender', this.postcomposeD_.bind(this));
       }
       map.renderSync();
     }
@@ -139,6 +147,8 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
     if (this.getMap()) {
       l.precompose = layers[0].on('precompose', this.precomposeA_.bind(this));
       l.postcompose = layers[0].on('postcompose', this.postcomposeA_.bind(this));
+      l.precompose = layers[0].on('prerender', this.precomposeA_.bind(this));
+      l.postcompose = layers[0].on('postrender', this.postcomposeA_.bind(this));
       this.getMap().renderSync();
     }
     this.layers_.push(layers[0]);
@@ -157,6 +167,8 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
     if (this.getMap()) {
       l.precompose = layers[0].on('precompose', this.precomposeB_.bind(this));
       l.postcompose = layers[0].on('postcompose', this.postcomposeB_.bind(this));
+      l.precompose = layers[0].on('prerender', this.precomposeB_.bind(this));
+      l.postcompose = layers[0].on('postrender', this.postcomposeB_.bind(this));
       this.getMap().renderSync();
     }
     this.layers_.push(layers[0]);
@@ -175,6 +187,8 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
     if (this.getMap()) {
       l.precompose = layers[0].on('precompose', this.precomposeC_.bind(this));
       l.postcompose = layers[0].on('postcompose', this.postcomposeC_.bind(this));
+      l.precompose = layers[0].on('prerender', this.precomposeC_.bind(this));
+      l.postcompose = layers[0].on('postrender', this.postcomposeC_.bind(this));
       this.getMap().renderSync();
     }
     this.layers_.push(layers[0]);
@@ -193,6 +207,8 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
     if (this.getMap()) {
       l.precompose = layers[0].on('precompose', this.precomposeD_.bind(this));
       l.postcompose = layers[0].on('postcompose', this.postcomposeD_.bind(this));
+      l.precompose = layers[0].on('prerender', this.precomposeD_.bind(this));
+      l.postcompose = layers[0].on('postrender', this.postcomposeD_.bind(this));
       this.getMap().renderSync();
     }
     this.layers_.push(layers[0]);
