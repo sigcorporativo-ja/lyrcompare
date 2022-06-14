@@ -7,7 +7,7 @@ const map = M.map({
 M.language.setLang('es'); //Español
 //M.language.setLang('en');//Inglés
 
-const mp = new M.plugin.LyrCompare({
+const mp = new LyrCompare({
   layers: [
       'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*orto_2010-11',
       'WMTS*http://www.ideandalucia.es/geowebcache/service/wmts?*toporaster',
