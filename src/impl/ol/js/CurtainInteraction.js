@@ -255,7 +255,7 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
       } else {
         e = [-10000000, -10000000];
       }
-      if (this.staticDivision === 2 && e.pointerEvent.buttons !== 1) {
+      if (this.staticDivision === 2 && e.originalEvent.buttons !== 1) {
         const lienzoMapa = this.map_.getSize();
         this.pos = [lienzoMapa[0] / 2, lienzoMapa[1] / 2];
         this.swipeClicked = false;
