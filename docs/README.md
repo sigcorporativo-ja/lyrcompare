@@ -7,8 +7,9 @@ Plugin que permite comparar varias capas sobre una cartografía base. La extensi
 
 # Dependencias
 
-- lyrcompare.ol.min.js
-- lyrcompare.ol.min.css
+- lyrcompare-1.1.0.ol.min.js
+- lyrcompare-1.1.0.ol.min.css
+- Mapea v6.2.0
 
 
 ```html
