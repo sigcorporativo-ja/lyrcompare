@@ -68,7 +68,7 @@
     "name": "LyrCompare",
     "description": "Comparación entre capas",
     "text": "Plugin que permite comparar varias capas sobre una cartografía base. La extensión de las capas sobre lienzo vienen definidas por la posición del ratón o por el punto medio del lienzo.",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "date": "Junio, 2020",
     "author": "",
     "org": "Consejería de Hacienda, Industria y Energía. Junta de Andalucía.",
