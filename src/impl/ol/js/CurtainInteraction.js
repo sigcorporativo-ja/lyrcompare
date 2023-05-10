@@ -17,11 +17,13 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
 
     this.swipeClicked = false;
 
-    ol.interaction.Pointer.call(this, {
-      handleDownEvent: this.setPosition,
+    const pointInteraction = new ol.interaction.Pointer({
+      handleDownEvent: this.setPosition.bind(this),
       handleUpEvent: () => this.swipeClicked = false,
-      handleMoveEvent: this.setPosition,
-    });
+      handleMoveEvent: this.setPosition.bind(this),
+    }, this);
+
+    options.map.addInteraction(pointInteraction);
 
     // Default options
     const optionsE = options || {};
