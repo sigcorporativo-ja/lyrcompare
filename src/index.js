@@ -1,7 +1,7 @@
-import M$plugin$LyrCompare from '/home/cristinaariza/Documentos/Mapea-publico/mapea-publico/src/plugins/v5/lyrcompare/src/facade/js/lyrcompare';
-import M$control$LyrCompareControl from '/home/cristinaariza/Documentos/Mapea-publico/mapea-publico/src/plugins/v5/lyrcompare/src/facade/js/lyrcomparecontrol';
-import M$impl$control$CurtainInteraction from '/home/cristinaariza/Documentos/Mapea-publico/mapea-publico/src/plugins/v5/lyrcompare/src/impl/ol/js/CurtainInteraction';
-import M$impl$control$Lyrcomparecontrol from '/home/cristinaariza/Documentos/Mapea-publico/mapea-publico/src/plugins/v5/lyrcompare/src/impl/ol/js/lyrcomparecontrol';
+import M$plugin$LyrCompare from '/home/fbmanas/Codigo/git-sigc/lyrcompare/src/facade/js/lyrcompare';
+import M$control$LyrCompareControl from '/home/fbmanas/Codigo/git-sigc/lyrcompare/src/facade/js/lyrcomparecontrol';
+import M$impl$control$CurtainInteraction from '/home/fbmanas/Codigo/git-sigc/lyrcompare/src/impl/ol/js/CurtainInteraction';
+import M$impl$control$Lyrcomparecontrol from '/home/fbmanas/Codigo/git-sigc/lyrcompare/src/impl/ol/js/lyrcomparecontrol';
 
 if (!window.M.plugin) window.M.plugin = {};
 if (!window.M.control) window.M.control = {};

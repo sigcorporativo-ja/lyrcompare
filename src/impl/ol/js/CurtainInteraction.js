@@ -58,7 +58,9 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
       }
       this.getMap().renderSync();
     }
-    ol.interaction.Pointer.prototype.setMap.call(this, map);
+
+    super.setMap(map);
+
     if (map) {
       this.createSwipeControl();
       this.layers_[0].precompose = this.layers_[0].on('precompose', this.precomposeA_.bind(this));
@@ -478,9 +480,9 @@ export default class CurtainInteraction extends ol.interaction.Pointer {
   * 
   */
   moveSwipeControl() {
-    const lienzoMapa = this.map_.getSize();
     const swipeControl = document.querySelector('.lyrcompare-swipe-control');
     if (swipeControl && this.getMap()) {
+      const lienzoMapa = this.map_.getSize();
       if (this.staticDivision == 0 || this.staticDivision == 2) {
         if (this.comparisonMode == 1) {
           swipeControl.style.top = (lienzoMapa[1] / 2) - (swipeControl.offsetHeight / 2) + 'px';
