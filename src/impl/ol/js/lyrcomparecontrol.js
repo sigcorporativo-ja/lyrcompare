@@ -35,12 +35,15 @@ export default class Lyrcomparecontrol extends M.impl.Control {
     lyrA.setVisible(true);
     lyrB.setVisible(true);
 
+    const map = this.olMap;
+
     this.transparentInteraction_ = new CurtainInteraction({
       opacityVal,
       lyrA,
       lyrB,
       lyrC,
-      lyrD
+      lyrD,
+      map
     });
 
     this.olMap.addInteraction(this.transparentInteraction_);
